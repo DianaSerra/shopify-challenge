@@ -1,7 +1,8 @@
 import React from "react";
-import ListGroup from "react-bootstrap/ListGroup";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import equal from "fast-deep-equal";
-
+import Ticket from "./Ticket";
 class TicketContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -15,11 +16,26 @@ class TicketContainer extends React.Component {
   }
   renderResults() {
     return this.props.movies.map((item) => (
-      <ListGroup.Item key={item.imdbID}>{item.Title}</ListGroup.Item>
+      <Ticket title={item.Title} imgURL={item.Poster} key={item.imdbID}>
+        {item.Title}
+      </Ticket>
     ));
   }
   render() {
-    return <ListGroup>{this.renderResults()}</ListGroup>;
+    return (
+      <Container style={styles.cardGroup}>
+        <Row xs={1} md={2} lg={3}>
+          {this.renderResults()}
+        </Row>
+      </Container>
+    );
   }
 }
+const styles = {
+  cardGroup: {
+    width: "50%",
+    display: "block",
+    paddingBottom: "80px",
+  },
+};
 export default TicketContainer;

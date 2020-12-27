@@ -32,16 +32,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <div style={styles.searchBar}>
+        <div style={styles.body}>
           <SearchBar search={this.search} />
+          <TicketContainer movies={this.state.movies} />
         </div>
-        <TicketContainer movies={this.state.movies} />
       </div>
     );
   }
 }
 const styles = {
-  searchBar: {
+  body: {
     margin: "auto",
     paddingTop: 20,
     width: "80%",
