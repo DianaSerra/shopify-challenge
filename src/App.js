@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React from "react";
+import "./App.css";
+import Header from "./components/Header.js";
+import SearchBar from "./components/SearchBar.js";
+import TicketContainer from "./components/TicketContainer.js";
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      movies: [],
+      nominations: [],
+    };
+    this.search = this.search.bind(this);
+  }
+  search(searchString) {
+    if (searchString) {
+      fetch(
+        "http://www.omdbapi.com/?apikey=1d8b2857&type=movie&r=json&s=" +
+          searchString.target.value
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          var newState = json.Search
+            ? Object.assign({ ...this.state }, { movies: json.Search })
+            : Object.assign({ ...this.state }, { movies: [] });
+          console.log(JSON.stringify(json));
+          this.setState(newState);
+        });
+    }
+  }
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <div style={styles.searchBar}>
+          <SearchBar search={this.search} />
+        </div>
+        <TicketContainer movies={this.state.movies} />
+      </div>
+    );
+  }
 }
-
+const styles = {
+  searchBar: {
+    margin: "auto",
+    paddingTop: 20,
+    width: "80%",
+  },
+};
 export default App;
