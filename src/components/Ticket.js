@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 class Ticket extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.movie);
   }
   render() {
     return (
@@ -12,11 +13,17 @@ class Ticket extends React.Component {
         <Card.Img
           style={styles.cardImg}
           variant="top"
-          src={this.props.imgURL}
+          src={this.props.movie.Poster}
         />
         <Card.Body style={styles.cardBody}>
-          <Card.Title>{this.props.title}</Card.Title>
-          <Button variant="primary">Nominate</Button>
+          <Card.Title>{this.props.movie.Title}</Card.Title>
+          <Button
+            value={this.props.movie}
+            variant="primary"
+            onClick={() => this.props.nominate(this.props.movie)}
+          >
+            Nominate
+          </Button>
         </Card.Body>
       </Card>
     );

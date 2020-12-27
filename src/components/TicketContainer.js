@@ -16,7 +16,7 @@ class TicketContainer extends React.Component {
   }
   renderResults() {
     return this.props.movies.map((item) => (
-      <Ticket title={item.Title} imgURL={item.Poster} key={item.imdbID}>
+      <Ticket movie={item} key={item.imdbID} nominate={this.props.nominate}>
         {item.Title}
       </Ticket>
     ));
@@ -33,7 +33,7 @@ class TicketContainer extends React.Component {
 }
 const styles = {
   cardGroup: {
-    width: "50%",
+    width: "100%",
     display: "block",
     paddingBottom: "80px",
   },
