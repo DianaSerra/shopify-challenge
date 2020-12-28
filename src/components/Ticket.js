@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-
 class Ticket extends React.Component {
   constructor(props) {
     super(props);

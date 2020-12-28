@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "../assets/images/Grid.png";
-
+import Badge from "react-bootstrap/Badge";
 class NominationList extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,15 @@ class NominationList extends React.Component {
     console.log(this.props.nominations);
     return this.props.nominations.map((item) => (
       <li key={item.imdbID}>
-        {item.Title} ({item.Year})
+        {item.Title} ({item.Year}){"  "}
+        <Badge
+          pill
+          style={styles.delElem}
+          variant="dark"
+          onClick={() => this.props.deleteNom(item)}
+        >
+          X
+        </Badge>
       </li>
     ));
   }
@@ -28,6 +36,9 @@ const styles = {
     backgroundImage: `url(${Grid})`,
     backgroundSize: "cover",
     height: "200px",
+  },
+  delElem: {
+    cursor: "pointer",
   },
 };
 export default NominationList;

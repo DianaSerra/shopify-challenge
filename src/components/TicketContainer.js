@@ -17,7 +17,7 @@ class TicketContainer extends React.Component {
   renderResults() {
     return this.props.movies.map((item) => {
       var disableButton = this.props.nominations.some(
-        (nom) => item.imdbID == nom.imdbID
+        (nom) => item.imdbID === nom.imdbID
       );
       return (
         <Ticket

@@ -17,6 +17,7 @@ class App extends React.Component {
     };
     this.search = this.search.bind(this);
     this.nominate = this.nominate.bind(this);
+    this.deleteNom = this.deleteNom.bind(this);
   }
   search(searchString) {
     if (searchString) {
@@ -37,7 +38,7 @@ class App extends React.Component {
   nominate(movie) {
     if (
       this.state.nominations.length < 5 &&
-      !this.state.nominations.some((item) => movie.imdbID == item.imdbID)
+      !this.state.nominations.some((item) => movie.imdbID === item.imdbID)
     ) {
       var newState = { ...this.state };
       newState.nominations.push(movie);
@@ -51,6 +52,16 @@ class App extends React.Component {
       this.setState(newState);
     }
     console.log(this.state);
+  }
+  deleteNom(movie) {
+    var newState = { ...this.state };
+    var index = this.state.nominations.findIndex(
+      (item) => movie.imdbID === item.imdbID
+    );
+    if (index !== -1) {
+      newState.nominations.splice(index, 1);
+      this.setState(newState);
+    }
   }
   render() {
     return (
@@ -69,7 +80,10 @@ class App extends React.Component {
               />
             </Col>
             <Col>
-              <NominationList nominations={this.state.nominations} />
+              <NominationList
+                nominations={this.state.nominations}
+                deleteNom={this.deleteNom}
+              />
             </Col>
           </Row>
         </Container>
