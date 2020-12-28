@@ -27,6 +27,7 @@ const styles = {
   nomList: {
     backgroundImage: `url(${Grid})`,
     backgroundSize: "cover",
+    height: "200px",
   },
 };
 export default NominationList;

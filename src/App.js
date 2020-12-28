@@ -13,7 +13,7 @@ class App extends React.Component {
     this.state = {
       movies: [],
       nominations: [],
-      nominationError: "",
+      nominationLimit: false,
     };
     this.search = this.search.bind(this);
     this.nominate = this.nominate.bind(this);
@@ -40,12 +40,12 @@ class App extends React.Component {
     if (this.state.nominations.length < 5) {
       var newState = { ...this.state };
       newState.nominations.push(movie);
-      newState.nominationError = "";
+      newState.nominationLimit = false;
       this.setState(newState);
     } else {
       var newState = Object.assign(
         { ...this.state },
-        { nominationError: "You have reached your nomination limit!!" }
+        { nominationLimit: true }
       );
       this.setState(newState);
     }
