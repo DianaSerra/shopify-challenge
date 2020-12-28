@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 class Ticket extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.movie);
   }
   render() {
     return (
@@ -15,7 +14,9 @@ class Ticket extends React.Component {
           src={this.props.movie.Poster}
         />
         <Card.Body style={styles.cardBody}>
-          <Card.Title>{this.props.movie.Title}</Card.Title>
+          <Card.Title>
+            {this.props.movie.Title} ({this.props.movie.Year})
+          </Card.Title>
           <Button
             disabled={this.props.disableButton}
             value={this.props.movie}

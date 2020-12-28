@@ -7,7 +7,6 @@ class NominationList extends React.Component {
     this.renderList = this.renderList.bind(this);
   }
   renderList() {
-    console.log(this.props.nominations);
     return this.props.nominations.map((item) => (
       <li key={item.imdbID}>
         {item.Title} ({item.Year}){"  "}

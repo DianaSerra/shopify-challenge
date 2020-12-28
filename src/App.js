@@ -7,6 +7,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TicketContainer from "./components/TicketContainer.js";
 import NominationList from "./components/NominationList.js";
+import Alert from "react-bootstrap/Alert";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,6 @@ class App extends React.Component {
           var newState = json.Search
             ? Object.assign({ ...this.state }, { movies: json.Search })
             : Object.assign({ ...this.state }, { movies: [] });
-          console.log(JSON.stringify(json));
           this.setState(newState);
         });
     }
@@ -51,7 +52,6 @@ class App extends React.Component {
       );
       this.setState(newState);
     }
-    console.log(this.state);
   }
   deleteNom(movie) {
     var newState = { ...this.state };
@@ -71,6 +71,19 @@ class App extends React.Component {
           <Row xs={1} md={1} lg={1}>
             <SearchBar search={this.search} />
           </Row>
+          {this.state.nominations.length === 5 ? (
+            <Alert variant="success">
+              <Alert.Heading>
+                Congrats! You've Successfully Nominated 5 Movies!
+              </Alert.Heading>
+              <p>
+                If you want to modify your nominations, start by deleting items
+                to free up space on your list.
+              </p>
+            </Alert>
+          ) : (
+            <span></span>
+          )}
           <Row xs={1} md={1} lg={2}>
             <Col>
               <TicketContainer
