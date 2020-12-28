@@ -15,11 +15,21 @@ class TicketContainer extends React.Component {
     }
   }
   renderResults() {
-    return this.props.movies.map((item) => (
-      <Ticket movie={item} key={item.imdbID} nominate={this.props.nominate}>
-        {item.Title}
-      </Ticket>
-    ));
+    return this.props.movies.map((item) => {
+      var disableButton = this.props.nominations.some(
+        (nom) => item.imdbID == nom.imdbID
+      );
+      return (
+        <Ticket
+          movie={item}
+          key={item.imdbID}
+          nominate={this.props.nominate}
+          disableButton={disableButton}
+        >
+          {item.Title}
+        </Ticket>
+      );
+    });
   }
   render() {
     return (

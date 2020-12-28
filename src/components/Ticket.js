@@ -18,6 +18,7 @@ class Ticket extends React.Component {
         <Card.Body style={styles.cardBody}>
           <Card.Title>{this.props.movie.Title}</Card.Title>
           <Button
+            disabled={this.props.disableButton}
             value={this.props.movie}
             variant="primary"
             onClick={() => this.props.nominate(this.props.movie)}

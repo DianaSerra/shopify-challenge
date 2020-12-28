@@ -35,21 +35,21 @@ class App extends React.Component {
     }
   }
   nominate(movie) {
-    //if (e.target.value) {
-    //const movie = e.target.value;
-    if (this.state.nominations.length < 5) {
+    if (
+      this.state.nominations.length < 5 &&
+      !this.state.nominations.some((item) => movie.imdbID == item.imdbID)
+    ) {
       var newState = { ...this.state };
       newState.nominations.push(movie);
       newState.nominationLimit = false;
       this.setState(newState);
-    } else {
+    } else if (this.state.nominations.length >= 5) {
       var newState = Object.assign(
         { ...this.state },
         { nominationLimit: true }
       );
       this.setState(newState);
     }
-    //}
     console.log(this.state);
   }
   render() {
@@ -65,6 +65,7 @@ class App extends React.Component {
               <TicketContainer
                 movies={this.state.movies}
                 nominate={this.nominate}
+                nominations={this.state.nominations}
               />
             </Col>
             <Col>
