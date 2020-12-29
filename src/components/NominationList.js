@@ -25,8 +25,9 @@ class NominationList extends React.Component {
     return (
       <div style={styles.nomList}>
         <h4 style={styles.title}>
-          <img src={trophy} style={styles.trophy}></img> Nominate 5 of Your
-          Favorite Movies! <img src={trophy} style={styles.trophy}></img>
+          <img src={trophy} style={styles.trophy} alt="Trophy icon"></img>{" "}
+          Nominate 5 of Your Favorite Movies!{" "}
+          <img src={trophy} style={styles.trophy} alt="Trophy icon"></img>
         </h4>
         <ol style={styles.list}>{this.renderList()}</ol>
       </div>

@@ -75,9 +75,17 @@ class App extends React.Component {
           {this.state.nominations.length === 5 ? (
             <Alert style={styles.alert} variant="success">
               <Alert.Heading>
-                <img src={popcorn} style={styles.popcorn}></img> You've
-                Successfully Nominated 5 Movies!{" "}
-                <img src={popcorn} style={styles.popcorn}></img>
+                <img
+                  src={popcorn}
+                  style={styles.popcorn}
+                  alt="Popcorn icon"
+                ></img>{" "}
+                You've Successfully Nominated 5 Movies!{" "}
+                <img
+                  src={popcorn}
+                  style={styles.popcorn}
+                  alt="Popcorn icon"
+                ></img>
               </Alert.Heading>
               <p style={styles.alertBody}>
                 If you want to modify your nominations, start by deleting items

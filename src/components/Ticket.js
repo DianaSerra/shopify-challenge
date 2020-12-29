@@ -8,7 +8,11 @@ class Ticket extends React.Component {
   render() {
     return (
       <Card style={styles.card}>
-        <Card.Img variant="top" src={this.props.movie.Poster} />
+        <Card.Img
+          variant="top"
+          src={this.props.movie.Poster}
+          alt="Movie Poster"
+        />
         <Card.Body>
           <Card.Title style={styles.cardTitle}>
             {this.props.movie.Title} ({this.props.movie.Year})
@@ -29,7 +33,6 @@ class Ticket extends React.Component {
 const styles = {
   card: {
     width: "30%",
-    //height: "200px",
     display: "inline-block",
     fontFamily: "Roboto Mono",
   },

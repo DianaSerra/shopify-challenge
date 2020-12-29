@@ -10,7 +10,6 @@ class TicketContainer extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (!equal(this.props.movies, prevProps.movies)) {
-      // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
       this.renderResults();
     }
   }

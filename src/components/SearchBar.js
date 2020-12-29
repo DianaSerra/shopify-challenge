@@ -20,7 +20,11 @@ class SearchBar extends React.Component {
       <InputGroup style={styles.barContainer}>
         <InputGroup.Prepend style={styles.prepend}>
           <InputGroup.Text style={styles.prepend} id="basic-addon1">
-            <img src={loupe} style={styles.loupe}></img>
+            <img
+              src={loupe}
+              style={styles.loupe}
+              alt="Magnifying glass icon"
+            ></img>
           </InputGroup.Text>
         </InputGroup.Prepend>
         <Form.Control

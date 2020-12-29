@@ -2,7 +2,7 @@ import React from "react";
 import header from "../assets/images/Header.png";
 class Header extends React.Component {
   render() {
-    return <img src={header} style={styles.header}></img>;
+    return <img src={header} style={styles.header} alt="The Shoppies!"></img>;
   }
 }
 const styles = {
