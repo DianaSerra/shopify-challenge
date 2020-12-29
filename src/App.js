@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import TicketContainer from "./components/TicketContainer.js";
 import NominationList from "./components/NominationList.js";
 import Alert from "react-bootstrap/Alert";
+import popcorn from "./assets/images/cinema 1.png";
 
 class App extends React.Component {
   constructor(props) {
@@ -72,11 +73,13 @@ class App extends React.Component {
             <SearchBar search={this.search} />
           </Row>
           {this.state.nominations.length === 5 ? (
-            <Alert variant="success">
+            <Alert style={styles.alert} variant="success">
               <Alert.Heading>
-                Congrats! You've Successfully Nominated 5 Movies!
+                <img src={popcorn} style={styles.popcorn}></img> You've
+                Successfully Nominated 5 Movies!{" "}
+                <img src={popcorn} style={styles.popcorn}></img>
               </Alert.Heading>
-              <p>
+              <p style={styles.alertBody}>
                 If you want to modify your nominations, start by deleting items
                 to free up space on your list.
               </p>
@@ -126,6 +129,15 @@ const styles = {
     paddingTop: "40px",
     bottom: 0,
     alignText: "center",
+  },
+  alert: {
+    fontFamily: "Roboto Mono",
+  },
+  alertBody: {
+    fontSize: "13px",
+  },
+  popcorn: {
+    height: "30px",
   },
 };
 export default App;

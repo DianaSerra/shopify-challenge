@@ -8,20 +8,16 @@ class Ticket extends React.Component {
   render() {
     return (
       <Card style={styles.card}>
-        <Card.Img
-          style={styles.cardImg}
-          variant="top"
-          src={this.props.movie.Poster}
-        />
-        <Card.Body style={styles.cardBody}>
-          <Card.Title>
+        <Card.Img variant="top" src={this.props.movie.Poster} />
+        <Card.Body>
+          <Card.Title style={styles.cardTitle}>
             {this.props.movie.Title} ({this.props.movie.Year})
           </Card.Title>
           <Button
             disabled={this.props.disableButton}
-            value={this.props.movie}
             variant="primary"
             onClick={() => this.props.nominate(this.props.movie)}
+            style={styles.nomButton}
           >
             Nominate
           </Button>
@@ -35,14 +31,16 @@ const styles = {
     width: "30%",
     //height: "200px",
     display: "inline-block",
+    fontFamily: "Roboto Mono",
   },
-  cardImg: {
-    //width: "150px",
-    //height: "200px",
-    //display: "inline-block",
+  cardTitle: {
+    fontSize: "17px",
   },
-  cardBody: {
-    //height: "25px",
+  nomButton: {
+    backgroundColor: "#A50104",
+    borderWidth: "2px",
+    borderColor: "#FDC221",
+    borderRadius: "16px",
   },
 };
 

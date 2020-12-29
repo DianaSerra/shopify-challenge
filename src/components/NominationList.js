@@ -46,16 +46,15 @@ const styles = {
     cursor: "pointer",
   },
   title: {
-    paddingTop: "10px",
+    paddingTop: "20px",
+    paddingBottom: "15px",
     fontSize: "17px",
   },
   trophy: {
     height: "20px",
   },
   list: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
+    paddingLeft: "50px",
     fontSize: "12px",
     textAlign: "start",
   },
