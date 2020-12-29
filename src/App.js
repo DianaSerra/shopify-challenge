@@ -25,7 +25,7 @@ class App extends React.Component {
   search(searchString) {
     if (searchString) {
       fetch(
-        "http://www.omdbapi.com/?apikey=1d8b2857&type=movie&r=json&s=" +
+        "https://www.omdbapi.com/?apikey=1d8b2857&type=movie&r=json&s=" +
           searchString.target.value
       )
         .then((res) => res.json())
