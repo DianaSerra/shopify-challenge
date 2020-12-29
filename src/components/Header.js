@@ -7,9 +7,11 @@ class Header extends React.Component {
 }
 const styles = {
   header: {
-    display: "flex",
-    maxWidth: "100%",
+    maxWidth: "60%",
     maxHeight: "100%",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 };
 export default Header;

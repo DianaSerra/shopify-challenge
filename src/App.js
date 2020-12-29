@@ -100,7 +100,7 @@ class App extends React.Component {
             </Col>
           </Row>
         </Container>
-        <footer>
+        <footer style={styles.footer}>
           <div style={{ fontFamily: "Roboto Mono", fontSize: 11 }}>
             Icons made by{" "}
             <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
@@ -121,6 +121,11 @@ const styles = {
     margin: "auto",
     paddingTop: 20,
     width: "80%",
+  },
+  footer: {
+    paddingTop: "40px",
+    bottom: 0,
+    alignText: "center",
   },
 };
 export default App;
