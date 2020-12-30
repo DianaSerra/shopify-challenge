@@ -7,8 +7,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TicketContainer from "./components/TicketContainer.js";
 import NominationList from "./components/NominationList.js";
-import Alert from "react-bootstrap/Alert";
+import Modal from "react-bootstrap/Modal";
 import popcorn from "./assets/images/cinema 1.png";
+import noentry from "./assets/images/no-entry 1.png";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +18,8 @@ class App extends React.Component {
       movies: [],
       nominations: [],
       nominationLimit: false,
+      showSucessModal: false,
+      showFullModal: false,
     };
     this.search = this.search.bind(this);
     this.nominate = this.nominate.bind(this);
@@ -45,13 +48,21 @@ class App extends React.Component {
       var newState = { ...this.state };
       newState.nominations.push(movie);
       newState.nominationLimit = false;
+      if (newState.nominations.length === 5) {
+        newState = Object.assign(
+          { ...newState },
+          { nominationLimit: true, showSucessModal: true }
+        );
+      }
       this.setState(newState);
-    } else if (this.state.nominations.length >= 5) {
+      console.log(newState);
+    } else if (this.state.nominations.length === 5) {
       var newState = Object.assign(
         { ...this.state },
-        { nominationLimit: true }
+        { nominationLimit: true, showFullModal: true }
       );
       this.setState(newState);
+      console.log(newState);
     }
   }
   deleteNom(movie) {
@@ -72,29 +83,6 @@ class App extends React.Component {
           <Row xs={1} md={1} lg={1}>
             <SearchBar search={this.search} />
           </Row>
-          {this.state.nominations.length === 5 ? (
-            <Alert style={styles.alert} variant="success">
-              <Alert.Heading>
-                <img
-                  src={popcorn}
-                  style={styles.popcorn}
-                  alt="Popcorn icon"
-                ></img>{" "}
-                You've Successfully Nominated 5 Movies!{" "}
-                <img
-                  src={popcorn}
-                  style={styles.popcorn}
-                  alt="Popcorn icon"
-                ></img>
-              </Alert.Heading>
-              <p style={styles.alertBody}>
-                If you want to modify your nominations, start by deleting items
-                to free up space on your list.
-              </p>
-            </Alert>
-          ) : (
-            <span></span>
-          )}
           <Row xs={1} md={1} lg={2}>
             <Col>
               <TicketContainer
@@ -111,6 +99,55 @@ class App extends React.Component {
             </Col>
           </Row>
         </Container>
+        <Modal
+          show={this.state.showSucessModal || this.state.showFullModal}
+          onHide={() =>
+            this.setState({ showSucessModal: false, showFullModal: false })
+          }
+          style={styles.modal}
+          variant="success"
+          size="lg"
+        >
+          <Modal.Header src={styles.modalTitle} closeButton>
+            <Modal.Title>
+              {this.state.showFullModal ? (
+                <div>
+                  <img
+                    src={noentry}
+                    style={styles.popcorn}
+                    alt="No entry icon"
+                  ></img>{" "}
+                  Your Nomination List is Already Full!{" "}
+                  <img
+                    src={noentry}
+                    style={styles.popcorn}
+                    alt="No entry icon"
+                  ></img>
+                </div>
+              ) : (
+                <div>
+                  <img
+                    src={popcorn}
+                    style={styles.popcorn}
+                    alt="Popcorn icon"
+                  ></img>{" "}
+                  You've Successfully Nominated 5 Movies!{" "}
+                  <img
+                    src={popcorn}
+                    style={styles.popcorn}
+                    alt="Popcorn icon"
+                  ></img>
+                </div>
+              )}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={styles.modalBody}>
+            <p>
+              If you want to modify your nominations, start by deleting items on
+              your list.
+            </p>
+          </Modal.Body>
+        </Modal>
         <footer style={styles.footer}>
           <div style={{ fontFamily: "Roboto Mono", fontSize: 11 }}>
             Icons made by{" "}
@@ -138,11 +175,15 @@ const styles = {
     bottom: 0,
     alignText: "center",
   },
-  alert: {
+  modal: {
     fontFamily: "Roboto Mono",
   },
-  alertBody: {
+  modalTitle: {
+    fontSize: "15px",
+  },
+  modalBody: {
     fontSize: "13px",
+    alignText: "center",
   },
   popcorn: {
     height: "30px",
