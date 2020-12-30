@@ -5,12 +5,9 @@ import SearchBar from "./components/SearchBar.js";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import TicketContainer from "./components/TicketContainer.js";
+import SearchResultContainer from "./components/SearchResultContainer.js";
 import NominationList from "./components/NominationList.js";
-import Modal from "react-bootstrap/Modal";
-import popcorn from "./assets/images/cinema 1.png";
-import noentry from "./assets/images/no-entry 1.png";
-
+import ListFullModal from "./components/ListFullModal.js";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,12 +15,13 @@ class App extends React.Component {
       movies: [],
       nominations: [],
       nominationLimit: false,
-      showSucessModal: false,
+      showSuccessModal: false,
       showFullModal: false,
     };
     this.search = this.search.bind(this);
     this.nominate = this.nominate.bind(this);
     this.deleteNom = this.deleteNom.bind(this);
+    this.closeListFull = this.closeListFull.bind(this);
   }
   search(searchString) {
     if (searchString) {
@@ -51,18 +49,16 @@ class App extends React.Component {
       if (newState.nominations.length === 5) {
         newState = Object.assign(
           { ...newState },
-          { nominationLimit: true, showSucessModal: true }
+          { nominationLimit: true, showSuccessModal: true }
         );
       }
       this.setState(newState);
-      console.log(newState);
     } else if (this.state.nominations.length === 5) {
       var newState = Object.assign(
         { ...this.state },
         { nominationLimit: true, showFullModal: true }
       );
       this.setState(newState);
-      console.log(newState);
     }
   }
   deleteNom(movie) {
@@ -75,6 +71,9 @@ class App extends React.Component {
       this.setState(newState);
     }
   }
+  closeListFull() {
+    this.setState({ showSuccessModal: false, showFullModal: false });
+  }
   render() {
     return (
       <div className="App">
@@ -85,7 +84,7 @@ class App extends React.Component {
           </Row>
           <Row xs={1} md={1} lg={2}>
             <Col>
-              <TicketContainer
+              <SearchResultContainer
                 movies={this.state.movies}
                 nominate={this.nominate}
                 nominations={this.state.nominations}
@@ -99,55 +98,11 @@ class App extends React.Component {
             </Col>
           </Row>
         </Container>
-        <Modal
-          show={this.state.showSucessModal || this.state.showFullModal}
-          onHide={() =>
-            this.setState({ showSucessModal: false, showFullModal: false })
-          }
-          style={styles.modal}
-          variant="success"
-          size="lg"
-        >
-          <Modal.Header src={styles.modalTitle} closeButton>
-            <Modal.Title>
-              {this.state.showFullModal ? (
-                <div>
-                  <img
-                    src={noentry}
-                    style={styles.popcorn}
-                    alt="No entry icon"
-                  ></img>{" "}
-                  Your Nomination List is Already Full!{" "}
-                  <img
-                    src={noentry}
-                    style={styles.popcorn}
-                    alt="No entry icon"
-                  ></img>
-                </div>
-              ) : (
-                <div>
-                  <img
-                    src={popcorn}
-                    style={styles.popcorn}
-                    alt="Popcorn icon"
-                  ></img>{" "}
-                  You've Successfully Nominated 5 Movies!{" "}
-                  <img
-                    src={popcorn}
-                    style={styles.popcorn}
-                    alt="Popcorn icon"
-                  ></img>
-                </div>
-              )}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body style={styles.modalBody}>
-            <p>
-              If you want to modify your nominations, start by deleting items on
-              your list.
-            </p>
-          </Modal.Body>
-        </Modal>
+        <ListFullModal
+          closeListFull={this.closeListFull}
+          showSuccessModal={this.state.showSuccessModal}
+          showFullModal={this.state.showFullModal}
+        />
         <footer style={styles.footer}>
           <div style={{ fontFamily: "Roboto Mono", fontSize: 11 }}>
             Icons made by{" "}
@@ -174,19 +129,6 @@ const styles = {
     paddingTop: "40px",
     bottom: 0,
     alignText: "center",
-  },
-  modal: {
-    fontFamily: "Roboto Mono",
-  },
-  modalTitle: {
-    fontSize: "15px",
-  },
-  modalBody: {
-    fontSize: "13px",
-    alignText: "center",
-  },
-  popcorn: {
-    height: "30px",
   },
 };
 export default App;

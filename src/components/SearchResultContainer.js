@@ -2,8 +2,8 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import equal from "fast-deep-equal";
-import Ticket from "./Ticket";
-class TicketContainer extends React.Component {
+import SearchResult from "./SearchResult";
+class SearchResultContainer extends React.Component {
   constructor(props) {
     super(props);
     this.renderResults = this.renderResults.bind(this);
@@ -19,14 +19,14 @@ class TicketContainer extends React.Component {
         (nom) => item.imdbID === nom.imdbID
       );
       return (
-        <Ticket
+        <SearchResult
           movie={item}
           key={item.imdbID}
           nominate={this.props.nominate}
           disableButton={disableButton}
         >
           {item.Title}
-        </Ticket>
+        </SearchResult>
       );
     });
   }
@@ -47,4 +47,4 @@ const styles = {
     paddingBottom: "80px",
   },
 };
-export default TicketContainer;
+export default SearchResultContainer;

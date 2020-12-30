@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-class Ticket extends React.Component {
+class SearchResult extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -47,4 +47,4 @@ const styles = {
   },
 };
 
-export default Ticket;
+export default SearchResult;
