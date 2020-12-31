@@ -14,7 +14,7 @@ class MovieModal extends React.Component {
   }
   fetchMovieDetails() {
     fetch(
-      "http://www.omdbapi.com/?apikey=1d8b2857&r=json&i=" +
+      "https://www.omdbapi.com/?apikey=1d8b2857&r=json&i=" +
         this.props.movie.imdbID
     )
       .then((res) => res.json())
@@ -44,22 +44,17 @@ class MovieModal extends React.Component {
               </Col>
               <Col style={styles.movieDetails}>
                 <span>
-                  <p>
-                    <h6 style={styles.detailHeading}>Release Date:</h6>
-                    {this.state.movieDetails.Released}
-                  </p>
-                  <p>
-                    <h6 style={styles.detailHeading}>Director:</h6>
-                    {this.state.movieDetails.Director}
-                  </p>
-                  <p>
-                    <h6 style={styles.detailHeading}>Starring:</h6>
-                    {this.state.movieDetails.Actors}
-                  </p>
-                  <p>
-                    <h6 style={styles.detailHeading}>Summary:</h6>
-                    {this.state.movieDetails.Plot}
-                  </p>
+                  <h6 style={styles.detailHeading}>Release Date:</h6>
+                  <p>{this.state.movieDetails.Released}</p>
+
+                  <h6 style={styles.detailHeading}>Director:</h6>
+                  <p>{this.state.movieDetails.Director}</p>
+
+                  <h6 style={styles.detailHeading}>Starring:</h6>
+                  <p>{this.state.movieDetails.Actors}</p>
+
+                  <h6 style={styles.detailHeading}>Summary:</h6>
+                  <p>{this.state.movieDetails.Plot}</p>
                 </span>
               </Col>
             </Row>
