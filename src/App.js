@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       movies: [],
-      nominations: [],
+      nominations: JSON.parse(localStorage.getItem("nominations")) || [],
       nominationLimit: false,
       showSuccessModal: false,
       showFullModal: false,
@@ -52,7 +52,12 @@ class App extends React.Component {
           { nominationLimit: true, showSuccessModal: true }
         );
       }
-      this.setState(newState);
+      this.setState(newState, () => {
+        localStorage.setItem(
+          "nominations",
+          JSON.stringify(this.state.nominations)
+        );
+      });
     } else if (this.state.nominations.length === 5) {
       var newState = Object.assign(
         { ...this.state },
@@ -68,7 +73,12 @@ class App extends React.Component {
     );
     if (index !== -1) {
       newState.nominations.splice(index, 1);
-      this.setState(newState);
+      this.setState(newState, () => {
+        localStorage.setItem(
+          "nominations",
+          JSON.stringify(this.state.nominations)
+        );
+      });
     }
   }
   closeListFull() {
