@@ -17,7 +17,9 @@ class App extends React.Component {
       nominationLimit: false,
       showSuccessModal: false,
       showFullModal: false,
+      searchInput: "",
     };
+    this.onChangeSearchText = this.onChangeSearchText.bind(this);
     this.search = this.search.bind(this);
     this.nominate = this.nominate.bind(this);
     this.deleteNom = this.deleteNom.bind(this);
@@ -32,9 +34,16 @@ class App extends React.Component {
         .then((res) => res.json())
         .then((json) => {
           var newState = json.Search
-            ? Object.assign({ ...this.state }, { movies: json.Search })
-            : Object.assign({ ...this.state }, { movies: [] });
+            ? Object.assign(
+                { ...this.state },
+                { movies: json.Search, searchInput: searchString.target.value }
+              )
+            : Object.assign(
+                { ...this.state },
+                { movies: [], searchInput: searchString.target.value }
+              );
           this.setState(newState);
+          console.log(newState);
         });
     }
   }
@@ -84,20 +93,28 @@ class App extends React.Component {
   closeListFull() {
     this.setState({ showSuccessModal: false, showFullModal: false });
   }
+  onChangeSearchText(val) {
+    this.setState({ searchInput: val });
+    this.search(val);
+  }
   render() {
     return (
       <div className="App">
         <Header />
         <Container style={styles.body}>
           <Row xs={1} md={1} lg={1}>
-            <SearchBar search={this.search} />
+            <SearchBar
+              search={this.search}
+              onChangeSearchText={this.onChangeSearchText}
+            />
           </Row>
-          <Row xs={1} md={1} lg={2}>
+          <Row xs={1} md={1} lg={2} style={{ justifyContent: "center" }}>
             <Col>
               <SearchResultContainer
                 movies={this.state.movies}
                 nominate={this.nominate}
                 nominations={this.state.nominations}
+                searchInput={this.state.searchInput}
               />
             </Col>
             <Col>

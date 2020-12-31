@@ -5,16 +5,8 @@ import loupe from "../assets/images/loupe.png";
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchInput: "",
-    };
-    this.onChangeSearchText = this.onChangeSearchText.bind(this);
   }
-  onChangeSearchText(val) {
-    const newState = Object.assign({ ...this.state }, { searchInput: val });
-    this.setState(newState);
-    this.props.search(this.state.searchInput);
-  }
+
   render() {
     return (
       <InputGroup style={styles.barContainer}>
@@ -31,7 +23,7 @@ class SearchBar extends React.Component {
           type="text"
           style={styles.bar}
           placeholder="Search Movie Titles ..."
-          onChange={this.onChangeSearchText}
+          onChange={this.props.onChangeSearchText}
         />
       </InputGroup>
     );

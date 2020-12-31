@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import MovieModal from "./MovieModal.js";
+
 class SearchResult extends React.Component {
   constructor(props) {
     super(props);
