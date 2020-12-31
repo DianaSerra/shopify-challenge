@@ -21,6 +21,7 @@ class SearchBar extends React.Component {
         </InputGroup.Prepend>
         <Form.Control
           type="text"
+          label="Search Movie Titles"
           style={styles.bar}
           placeholder="Search Movie Titles ..."
           onChange={this.props.onChangeSearchText}
